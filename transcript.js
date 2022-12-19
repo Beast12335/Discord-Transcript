@@ -57,7 +57,7 @@ module.exports = function (client, cmd, msglimit) {
     pObj.addLineBreak() //Make a new Line
     //The text content collection
     async function fetchAllMessages() {
-      const channel = client.channels.cache.get("<my-channel-id>");
+      const channel = client.channels.cache.get(message.channelId);
       let messages = [];
 
       // Create message pointer
@@ -76,8 +76,8 @@ module.exports = function (client, cmd, msglimit) {
       }
   }
 
-  console.log(messages);  // Print all messages
-}
+   console.log(messages);  // Print all messages
+}();
     /* let messageCollection = message.channel.createMessageCollector({filter}); //make a new collection
     let channelMessages = await message.channel.messages.fetch({//fetch the last 100 messages
       limit: 100
