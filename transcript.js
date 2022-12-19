@@ -73,7 +73,7 @@ module.exports = function (client, cmd, msglimit) {
 
               // Update our message pointer to be last message in page of messages
               message = 0 < messagePage.size ? messagePage.at(messagePage.size - 1) : null;
-      }
+      }) 
   }
 
    console.log(messages);  // Print all messages
