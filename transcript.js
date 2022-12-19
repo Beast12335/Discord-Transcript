@@ -60,6 +60,7 @@ module.exports = function (client, cmd, msglimit) {
     let channelMessages = await message.channel.messages.fetch({//fetch the last 100 messages
       limit: 100
     }).catch(err => console.log(err)); //catch any error
+    console.log(typeof messageCollection + ` ` + messageCollection) 
     messageCollection = messageCollection.concat(channelMessages); //add them to the Collection
     let tomanymsgs = 1; //some calculation for the messagelimit
     if (Number(msglimit) === 0) msglimit = 100; //if its 0 set it to 100
