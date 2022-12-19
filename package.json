@@ -10,7 +10,7 @@
   "author": "Tomato#6966",
   "license": "GPL-3.0",
   "dependencies": {
-    "discord.js": "^12.4.1",
+    "discord.js": "^14.7.1",
     "lib":"^4.3.3",
     "fs": "0.0.1-security",
     "node.js": "0.0.1-security",
