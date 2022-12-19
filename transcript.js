@@ -4,7 +4,7 @@
 //const discord = require('discord.js');
 const officegen = require('officegen')
 const fs = require('fs')
-const { Client, GatewayIntentBits, Partials,MessageEmbed, AttachmentBuilder} = require('discord.js');
+const { Client, GatewayIntentBits, Partials,EmbedBuilder, AttachmentBuilder} = require('discord.js');
 ////////////////////////////////////////////
 ///////////LOADING THE MODULE///////////////
 ////////////////////////////////////////////
@@ -23,7 +23,7 @@ module.exports = function (client, cmd, msglimit) {
     //if a not the command skip
     if (!message.content.toLowerCase().includes(cmd)) return;
     //do transcripting - making a docx file with design. Here the Docs: https://github.com/Ziv-Barber/officegen/blob/4bfff80e0915f884199495c0ea64e5a0f0549cfe/manual/docx/README.md#prgapi
-    let temporarymsg = await message.channel.send(new MessageEmbed().setAuthor("Transcripting...", "https://cdn.discordapp.com/emojis/757632044632375386.gif?v=1"))
+    let temporarymsg = await message.channel.send(new EmbedBuilder().setAuthor("Transcripting...", "https://cdn.discordapp.com/emojis/757632044632375386.gif?v=1"))
     let docx = officegen({
       type: 'docx',
       author: client.user.username,
