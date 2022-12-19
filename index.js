@@ -1,5 +1,5 @@
 const lib = require('lib')({token: process.env['ltoken']});
-const Discord = require("discord.js");
+//const Discord = require("discord.js");
 //const client = new Discord.Client();
 const { Client, GatewayIntentBits, Partials } = require('discord.js');
 const client = new Client({
