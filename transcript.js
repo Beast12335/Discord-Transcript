@@ -4,7 +4,7 @@
 //const discord = require('discord.js');
 const officegen = require('officegen')
 const fs = require('fs')
-const { Client, GatewayIntentBits, Partials,EmbedBuilder, AttachmentBuilder} = require('discord.js');
+const { Client, GatewayIntentBits, Partials,MessageEmbed, AttachmentBuilder} = require('discord.js');
 ////////////////////////////////////////////
 ///////////LOADING THE MODULE///////////////
 ////////////////////////////////////////////
