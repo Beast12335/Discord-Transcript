@@ -118,11 +118,11 @@ module.exports = function (client, cmd, msglimit) {
         //const attachment = new MessageAttachment(buffer, `./transcript.docx`); //send it as an attachment
         //send the Transcript Into the Channel and then Deleting it again from the FOLDER
         message.channel.send(attachment).then(del => { //after sending it delete the file and edit the temp message to an approvement
-          temporarymsg.edit(new EmbedBuilder().setAuthor({name:"Here is the Transcript",iconUrl:message.member.user.displayAvatarURL({ dynamic: true }))})
+          temporarymsg.edit(new EmbedBuilder().setAuthor({name:"Here is the Transcript",iconUrl:message.member.user.displayAvatarURL({ dynamic: true })}))
           fs.unlinkSync(`./transcript.docx`)
         })
       } catch { // if the file is to big to be sent, then catch it!
-        temporarymsg.edit(new EmbedBuilder().setAuthor({name:"ERROR! Transcript is to big, to be sent into the Channel!",iconUrl:message.member.user.displayAvatarURL({ dynamic: true }}).setFooter({text:"Smaller the maximum amount of Messages!"})))
+        temporarymsg.edit(new EmbedBuilder().setAuthor({name:"ERROR! Transcript is to big, to be sent into the Channel!",iconUrl:message.member.user.displayAvatarURL({ dynamic: true })}).setFooter({text:"Smaller the maximum amount of Messages!"})))
         fs.unlinkSync(`./transcript.docx`) //delete the docx
       }
     })
