@@ -56,8 +56,29 @@ module.exports = function (client, cmd, msglimit) {
     pObj.addText(`  [CLICK HERE TO JUMP]`, { hyperlink: 'myBookmark', font_face: 'Arial', color: '1979a9', italic: false, bold: true, font_size: 8 });  //Make a hyperlink to the BOOKMARK (Created later)
     pObj.addLineBreak() //Make a new Line
     //The text content collection
-    const filter;
-    let messageCollection = message.channel.createMessageCollector({filter}); //make a new collection
+    async function fetchAllMessages() {
+      const channel = client.channels.cache.get("<my-channel-id>");
+      let messages = [];
+
+      // Create message pointer
+      let message = await channel.messages
+        .fetch({ limit: 1 })
+        .then(messagePage => (messagePage.size === 1 ? messagePage.at(0) : null));
+
+      while (message) {
+          await channel.messages
+            .fetch({ limit: 100, before: message.id })
+            .then(messagePage => {
+              messagePage.forEach(msg => messages.push(msg));
+
+              // Update our message pointer to be last message in page of messages
+              message = 0 < messagePage.size ? messagePage.at(messagePage.size - 1) : null;
+      }
+  }
+
+  console.log(messages);  // Print all messages
+}
+    /* let messageCollection = message.channel.createMessageCollector({filter}); //make a new collection
     let channelMessages = await message.channel.messages.fetch({//fetch the last 100 messages
       limit: 100
     }).catch(err => console.log(err)); //catch any error
@@ -77,7 +98,8 @@ module.exports = function (client, cmd, msglimit) {
     }
     let msgs = messageCollection.array().reverse(); //reverse the array to have it listed like the discord chat
     //now for every message in the array make a new paragraph!
-    await msgs.forEach(async msg => {
+    */ 
+    await messages.forEach(async msg => {
       // Create a new paragraph:
       pObj = docx.createP()
       pObj.options.align = 'left'; //Also 'right' or 'justify'.
