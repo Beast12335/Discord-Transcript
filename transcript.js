@@ -23,7 +23,7 @@ module.exports = function (client, cmd, msglimit) {
     //if a not the command skip
     if (!message.content.toLowerCase().includes(cmd)) return;
     //do transcripting - making a docx file with design. Here the Docs: https://github.com/Ziv-Barber/officegen/blob/4bfff80e0915f884199495c0ea64e5a0f0549cfe/manual/docx/README.md#prgapi
-    let temporarymsg = await message.channel.send(new EmbedBuilder().setAuthor("Transcripting...", "https://cdn.discordapp.com/emojis/757632044632375386.gif?v=1"))
+    let temporarymsg = await message.channel.send(new EmbedBuilder().setAuthor(name:"Transcripting...",iconUrl:"https://cdn.discordapp.com/emojis/757632044632375386.gif?v=1"))
     let docx = officegen({
       type: 'docx',
       author: client.user.username,
@@ -118,11 +118,11 @@ module.exports = function (client, cmd, msglimit) {
         //const attachment = new MessageAttachment(buffer, `./transcript.docx`); //send it as an attachment
         //send the Transcript Into the Channel and then Deleting it again from the FOLDER
         message.channel.send(attachment).then(del => { //after sending it delete the file and edit the temp message to an approvement
-          temporarymsg.edit(new MessageEmbed().setAuthor("Here is the Transcript", message.member.user.displayAvatarURL({ dynamic: true })))
+          temporarymsg.edit(new EmbedBuilder().setAuthor(name:"Here is the Transcript",iconUrl:message.member.user.displayAvatarURL({ dynamic: true })))
           fs.unlinkSync(`./transcript.docx`)
         })
       } catch { // if the file is to big to be sent, then catch it!
-        temporarymsg.edit(new MessageEmbed().setAuthor("ERROR! Transcript is to big, to be sent into the Channel!", message.member.user.displayAvatarURL({ dynamic: true }).setFooter("Smaller the maximum amount of Messages!")))
+        temporarymsg.edit(new EmbedBuilder().setAuthor("ERROR! Transcript is to big, to be sent into the Channel!",iconUrl:message.member.user.displayAvatarURL({ dynamic: true }).setFooter("Smaller the maximum amount of Messages!")))
         fs.unlinkSync(`./transcript.docx`) //delete the docx
       }
     })
