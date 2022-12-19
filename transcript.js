@@ -4,7 +4,7 @@
 const discord = require('discord.js');
 const officegen = require('officegen')
 const fs = require('fs')
-const { MessageAttachment, MessageEmbed } = require(`discord.js`);
+const { Client, GatewayIntentBits, Partials } = require('discord.js');
 ////////////////////////////////////////////
 ///////////LOADING THE MODULE///////////////
 ////////////////////////////////////////////
@@ -18,8 +18,8 @@ module.exports = function (client, cmd, msglimit) {
   console.log(` :: ⬜️ Module: ${description.name} | Loaded version ${description.version} from ("${description.filename}")`)
 
   //if a message is received
-  client.on("message", async message => {
-    if (message.author.bot) return;
+  client.on("messageCreate", async message => {
+    //if (message.author.bot) return;
     //if a not the command skip
     if (!message.content.toLowerCase().includes(cmd)) return;
     //do transcripting - making a docx file with design. Here the Docs: https://github.com/Ziv-Barber/officegen/blob/4bfff80e0915f884199495c0ea64e5a0f0549cfe/manual/docx/README.md#prgapi
@@ -114,7 +114,8 @@ module.exports = function (client, cmd, msglimit) {
     out.on("finish", function (err, result) {
       try { // try to send the file
         const buffer = fs.readFileSync(`./transcript.docx`); //get a buffer file
-        const attachment = new MessageAttachment(buffer, `./transcript.docx`); //send it as an attachment
+        const attachment = new AttachmentBuilder(buffer, { name: `./transcript.docx` });
+        //const attachment = new MessageAttachment(buffer, `./transcript.docx`); //send it as an attachment
         //send the Transcript Into the Channel and then Deleting it again from the FOLDER
         message.channel.send(attachment).then(del => { //after sending it delete the file and edit the temp message to an approvement
           temporarymsg.edit(new MessageEmbed().setAuthor("Here is the Transcript", message.member.user.displayAvatarURL({ dynamic: true })))
