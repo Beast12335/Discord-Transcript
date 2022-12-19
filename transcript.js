@@ -56,7 +56,8 @@ module.exports = function (client, cmd, msglimit) {
     pObj.addText(`  [CLICK HERE TO JUMP]`, { hyperlink: 'myBookmark', font_face: 'Arial', color: '1979a9', italic: false, bold: true, font_size: 8 });  //Make a hyperlink to the BOOKMARK (Created later)
     pObj.addLineBreak() //Make a new Line
     //The text content collection
-    let messageCollection = message.channel.createMessageCollector(); //make a new collection
+    const filter;
+    let messageCollection = message.channel.createMessageCollector({filter}); //make a new collection
     let channelMessages = await message.channel.messages.fetch({//fetch the last 100 messages
       limit: 100
     }).catch(err => console.log(err)); //catch any error
