@@ -61,18 +61,18 @@ module.exports = function (client, cmd, msglimit) {
     let messages = [];
 
       // Create message pointer
-    let message = await message.channel.messages
+    let messaget = await message.channel.messages
         .fetch({ limit: 1 })
         .then(messagePage => (messagePage.size === 1 ? messagePage.at(0) : null));
 
-    while (message) {
+    while (messaget) {
       await message.channel.messages
-        .fetch({ limit: 100, before: message.id })
+        .fetch({ limit: 100, before: messaget.id })
         .then(messagePage => {
           messagePage.forEach(msg => messages.push(msg));
 
           // Update our message pointer to be last message in page of messages
-          message = 0 < messagePage.size ? messagePage.at(messagePage.size - 1) : null;
+          messaget = 0 < messagePage.size ? messagePage.at(messagePage.size - 1) : null;
         }) 
     }
 
