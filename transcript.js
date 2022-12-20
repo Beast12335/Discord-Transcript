@@ -56,28 +56,28 @@ module.exports = function (client, cmd, msglimit) {
     pObj.addText(`  [CLICK HERE TO JUMP]`, { hyperlink: 'myBookmark', font_face: 'Arial', color: '1979a9', italic: false, bold: true, font_size: 8 });  //Make a hyperlink to the BOOKMARK (Created later)
     pObj.addLineBreak() //Make a new Line
     //The text content collection
-    async function fetchAllMessages() {
-      const channel = client.channels.cache.get(message.channelId);
-      let messages = [];
+    //async function fetchAllMessages() {
+     // const channel = client.channels.cache.get(message.channelId);
+    let messages = [];
 
       // Create message pointer
-      let message = await channel.messages
+    let message = await message.channel.messages
         .fetch({ limit: 1 })
         .then(messagePage => (messagePage.size === 1 ? messagePage.at(0) : null));
 
-      while (message) {
-        await channel.messages
-          .fetch({ limit: 100, before: message.id })
-          .then(messagePage => {
-            messagePage.forEach(msg => messages.push(msg));
+    while (message) {
+      await message.channel.messages
+        .fetch({ limit: 100, before: message.id })
+        .then(messagePage => {
+          messagePage.forEach(msg => messages.push(msg));
 
-            // Update our message pointer to be last message in page of messages
-            message = 0 < messagePage.size ? messagePage.at(messagePage.size - 1) : null;
-          }) 
-      }
+          // Update our message pointer to be last message in page of messages
+          message = 0 < messagePage.size ? messagePage.at(messagePage.size - 1) : null;
+        }) 
+    }
 
-    console.log(messages);  // Print all messages
-}
+   console.log(messages);  // Print all messages
+//}
     /* let messageCollection = message.channel.createMessageCollector({filter}); //make a new collection
     let channelMessages = await message.channel.messages.fetch({//fetch the last 100 messages
       limit: 100
