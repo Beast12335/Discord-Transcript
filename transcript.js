@@ -73,10 +73,10 @@ module.exports = function (client, cmd, msglimit) {
 
             // Update our message pointer to be last message in page of messages
             message = 0 < messagePage.size ? messagePage.at(messagePage.size - 1) : null;
-          }
+          }) 
       }
 
-   console.log(messages);  // Print all messages
+    console.log(messages);  // Print all messages
 }
     /* let messageCollection = message.channel.createMessageCollector({filter}); //make a new collection
     let channelMessages = await message.channel.messages.fetch({//fetch the last 100 messages
