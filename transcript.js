@@ -76,7 +76,7 @@ module.exports = function (client, cmd, msglimit) {
         }) 
     }
 
-   console.log(messages);  // Print all messages
+   //console.log(messages);  // Print all messages
 //}
     /* let messageCollection = message.channel.createMessageCollector({filter}); //make a new collection
     let channelMessages = await message.channel.messages.fetch({//fetch the last 100 messages
