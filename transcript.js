@@ -141,7 +141,7 @@ module.exports = function (client, cmd, msglimit) {
         const attachment = new AttachmentBuilder(buffer, { name: `./transcript.docx` });
         //const attachment = new MessageAttachment(buffer, `./transcript.docx`); //send it as an attachment
         //send the Transcript Into the Channel and then Deleting it again from the FOLDER
-        message.channel.send({channelID:`914051184820633620`,content:`  `,files:[attachment]}).then(del => { //after sending it delete the file and edit the temp message to an approvement
+        channel.send({channelID:`914051184820633620`,content:`  `,files:[attachment]}).then(del => { //after sending it delete the file and edit the temp message to an approvement
           temporarymsg.edit({content:`  `,embeds:[new EmbedBuilder().setAuthor({name:"Here is the Transcript",iconUrl:message.member.user.displayAvatarURL({ dynamic: true })})]})
           fs.unlinkSync(`./transcript.docx`)
         })
