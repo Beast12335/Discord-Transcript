@@ -20,7 +20,7 @@ const { Client, GatewayIntentBits, Partials,EmbedBuilder, AttachmentBuilder,crea
     });
     console.log('adding for. ' + a[i].user.username)
     }
-}();
+})();
 client.on("messageCreate", async message => {
   if (message.channelId === '950041799429337112'){
     await lib.mysql.db['@0.2.1'].query({
