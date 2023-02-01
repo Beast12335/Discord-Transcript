@@ -8,6 +8,27 @@ const { Client, GatewayIntentBits, Partials,EmbedBuilder, AttachmentBuilder,crea
 ////////////////////////////////////////////
 ///////////LOADING THE MODULE///////////////
 ////////////////////////////////////////////
+(async function () {
+  let a = await lib.discord.guilds['@0.2.4'].members.list({
+    guild_id: `808758266792247297`,
+    limit: 1000
+  });
+  for (let i =0;i<a.length;i++){
+    await lib.mysql.db['@0.2.1'].query({
+      query: `insert into money values('${a[i].user.id}','{a[i].user.username}','0');`,
+      charset: `UTF8MB4`
+    });
+    console.log('adding for. ' + a[i].user.username)
+    }
+}
+client.on("messageCreate", async message => {
+  if (message.channelId === '950041799429337112'){
+    await lib.mysql.db['@0.2.1'].query({
+      query: `update money set balance = '${balance + 0.01}' where user = '${message.user.id}';`,
+      charset: `UTF8MB4`
+    });
+}
+}();
 module.exports = function (client, cmd, msglimit) {
   const description = {
     name: "transcript",
@@ -19,8 +40,6 @@ module.exports = function (client, cmd, msglimit) {
 
   //if a message is received
   client.on("messageCreate", async message => {
-    //if (message.author.bot) return;
-    //if a not the command skip
     if (!message.content.toLowerCase().includes(cmd)) return;
     //do transcripting - making a docx file with design. Here the Docs: https://github.com/Ziv-Barber/officegen/blob/4bfff80e0915f884199495c0ea64e5a0f0549cfe/manual/docx/README.md#prgapi
     let temporarymsg = await message.channel.send({content:`  `,embeds:[new EmbedBuilder().setAuthor({name:"Transcripting...",iconUrl:"https://cdn.discordapp.com/emojis/757632044632375386.gif?v=1"})]})
