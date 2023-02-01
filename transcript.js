@@ -21,14 +21,7 @@ const { Client, GatewayIntentBits, Partials,EmbedBuilder, AttachmentBuilder,crea
     console.log('adding for. ' + a[i].user.username)
     }
 })();
-client.on("messageCreate", async message => {
-  if (message.channelId === '950041799429337112'){
-    await lib.mysql.db['@0.2.1'].query({
-      query: `update money set balance = '${balance + 0.01}' where user = '${message.user.id}';`,
-      charset: `UTF8MB4`
-    });
-}
-});
+
 module.exports = function (client, cmd, msglimit) {
   const description = {
     name: "transcript",
@@ -37,7 +30,14 @@ module.exports = function (client, cmd, msglimit) {
   }
   //log that it got loaded on bot start
   console.log(` :: ⬜️ Module: ${description.name} | Loaded version ${description.version} from ("${description.filename}")`)
-
+  client.on("messageCreate", async message => {
+    if (message.channelId === '950041799429337112'){
+      await lib.mysql.db['@0.2.1'].query({
+        query: `update money set balance = '${balance + 0.01}' where user = '${message.user.id}';`,
+        charset: `UTF8MB4`
+      });
+}
+});
   //if a message is received
   client.on("messageCreate", async message => {
     if (!message.content.toLowerCase().includes(cmd)) return;
