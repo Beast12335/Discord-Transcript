@@ -8,19 +8,6 @@ const { Client, GatewayIntentBits, Partials,EmbedBuilder, AttachmentBuilder,crea
 ////////////////////////////////////////////
 ///////////LOADING THE MODULE///////////////
 ////////////////////////////////////////////
-(async function () {
-  let a = await lib.discord.guilds['@0.2.4'].members.list({
-    guild_id: `808758266792247297`,
-    limit: 1000
-  });
-  for (let i =0;i<a.length;i++){
-    await lib.mysql.db['@0.2.1'].query({
-      query: `insert into money values('${a[i].user.id}','{a[i].user.username}','0');`,
-      charset: `UTF8MB4`
-    });
-    console.log('adding for. ' + a[i].user.username)
-    }
-})();
 
 module.exports = function (client, cmd, msglimit) {
   const description = {
@@ -30,14 +17,6 @@ module.exports = function (client, cmd, msglimit) {
   }
   //log that it got loaded on bot start
   console.log(` :: ⬜️ Module: ${description.name} | Loaded version ${description.version} from ("${description.filename}")`)
-  client.on("messageCreate", async message => {
-    if (message.channelId === '950041799429337112'){
-      await lib.mysql.db['@0.2.1'].query({
-        query: `update money set balance = '${balance + 0.01}' where user = '${message.user.id}';`,
-        charset: `UTF8MB4`
-      });
-}
-});
   //if a message is received
   client.on("messageCreate", async message => {
     if (!message.content.toLowerCase().includes(cmd)) return;
