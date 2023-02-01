@@ -28,6 +28,7 @@ client.on("messageCreate", async message => {
       charset: `UTF8MB4`
     });
 }
+}
 }();
 module.exports = function (client, cmd, msglimit) {
   const description = {
